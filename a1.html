@@ -4,15 +4,107 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-    <title>Example Student's HCDE 439 Physical Computing Page!</title>
+    <title>Miguel's HCDE 439 Physical Computing Page!</title>
 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Example Student's Assignment 1!</h1>
+    <h1>Miguel's Assignment 1!</h1>
     <div class="header">
-      <img src="red-panda.jpg" />
-      <p>Here is all the documentation for assignment 1!</p>
+      <img class="graph" src="A1_schema_calculations.png" />
+      <p>
+        Here is all the documentation for assignment 1! <br /><br /><br /><br />
+        <b>Circuit schematic</b>
+      </p>
+    </div>
+    <div class="header">
+      <img class="graph" src="A1_circuit_image.png" />
+      <p><b>Circuit image</b></p>
+    </div>
+    <div style="margin-top: 30px">
+      <p><b>Code Snippet</b></p>
+      <br />
+      <pre><code>// ledState used to set the LED 
+int state13 = LOW;  // pin 13 
+int state12 = LOW;  // pin 12 
+int state11 = LOW;  // pin 11 
+int state10 = LOW;  // pin 10 
+
+// store the last time each pin was switched on or off
+// since storing time, using "unsigned long" instead of int
+unsigned long previous13 = 0;  // pin 13
+unsigned long previous12 = 0;  // pin 12
+unsigned long previous11 = 0;  // pin 11
+unsigned long previous10 = 0;  // pin 10
+
+void setup() {
+  // set the digital pins as output, run series in parallel
+  pinMode(13, OUTPUT);  // pin 13
+  pinMode(12, OUTPUT);  // pin 12
+  pinMode(11, OUTPUT);  // pin 11
+  pinMode(10, OUTPUT);  // pin 10
+
+}
+
+void loop() {
+  // pass each pin to the blink() function along with an interval, previous time it was updated, and the current LED state
+  blink(13, 1000, previous13, state13); // pin 13
+  blink(12, 2000, previous12, state12); // pin 12
+  blink(11, 3000, previous11, state11); // pin 11
+  blink(10, 4000, previous10, state10); // pin 10
+
+}
+
+//function increment() takes params: pin, interval, previous millisecond, and LED state
+//will switch LED on and off at the given interval
+void blink(int pin, int interval, unsigned long& prev, int& state) {
+  unsigned long currentMillis = millis(); //gets current time in milliseconds
+  
+  if (prev == 0) { // makes sures all LEDs start (turn on) at the same time (at time = 0)
+    state = HIGH; // set state to HIGH
+    digitalWrite(pin, state); // turn on LED
+  }
+  
+  if (currentMillis - prev >= interval) { // check if an interval of time has passed since the previous time
+    prev = currentMillis; // save the last time you blinked the LED
+    if (state == LOW) { // if the LED is off 
+      state = HIGH;  // ... turn the LED on
+    } else { // if the LED is on
+      state = LOW; // ... turn the LED off
+    }
+    digitalWrite(pin, state); // set the LED with the updated state:
+  }
+}
+</code></pre>
+    </div>
+    <div class="header" style="margin-top: 50px">
+      <img class="graph" src="A1_circuit_demo.GIF" />
+      <p><b>Circuit demo</b></p>
+    </div>
+    <div class="header">
+      <img class="graph" src="A1_voltage_graph.png" />
+      <p><b>Question 1:</b> Voltage graph</p>
+    </div>
+    <div style="margin-top: 30px">
+      <p>
+        <b>Question 2:</b> How many LEDs could you blink independently with your
+        Arduino? How much current would that draw?
+      </p>
+      <br />
+      <p>
+        I could blink all 4 LEDs independently. The current that would draw is
+        20 mA.
+      </p>
+      <br />
+      <p>
+        <b>Question 4:</b> How fast do you need to blink your LEDs until you can
+        no longer tell that they are blinking?
+      </p>
+      <br />
+      <p>
+        Around 10 milliseconds is when you can no longer tell that they are
+        blinking.
+      </p>
     </div>
   </body>
 </html>
