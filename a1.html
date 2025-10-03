@@ -55,7 +55,7 @@ void loop() {
 
 }
 
-//function increment() takes params: pin, interval, previous millisecond, and LED state
+//function blink() takes params: pin, interval, previous millisecond, and LED state
 //will switch LED on and off at the given interval
 void blink(int pin, int interval, unsigned long& prev, int& state) {
   unsigned long currentMillis = millis(); //gets current time in milliseconds
