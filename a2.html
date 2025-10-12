@@ -4,15 +4,121 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
-    <title>Example Student's HCDE 439 Physical Computing Page!</title>
+    <title>Miguel's HCDE 439 Physical Computing Page!</title>
 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Example Student's Assignment 2!</h1>
+    <h1>Miguel's Assignment 2!</h1>
     <div class="header">
-      <img src="red-panda.jpg" />
-      <p>Here is all the documentation for assignment 2!</p>
+      <img class="graph" src="A2 schematic.png" />
+      <p>
+        Here is all the documentation for assignment 2! <br /><br /><br /><br />
+        <b>Circuit schematic</b>
+      </p>
+    </div>
+    <div class="header">
+      <img
+        class="graph"
+        style="width: 50%"
+        src="A2 schematic calculations.png"
+      />
+      <p><b>Calculation for Resitors</b></p>
+    </div>
+    <div class="header">
+      <img class="graph" src="A2 Image .png" />
+      <p><b>Circuit image</b></p>
+    </div>
+    <div style="margin-top: 30px">
+      <p><b>Code Snippet</b></p>
+      <br />
+      <pre><code>
+//define pin number for components 
+int pinButton = 13; //button
+int red = 11; //red LED
+int green = 10; //green LED
+int blue = 9; //blue LED
+
+int buttonState = 0; //initialize button state (will store HIGH or LOW)
+
+// initialize random variables
+int R; // value for red LED
+int G; // value for green LED
+int B; // value for blue LED
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(pinButton, INPUT); //setup button pin as INPUT (check if button pressed, if there is current)
+  pinMode(red, OUTPUT); //setup red LED pin as OUTPUT 
+  pinMode(green, OUTPUT); //set green LED pin as OUTPUT
+  pinMode(blue, OUTPUT); //set blue LED pin as OUTPUT 
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  buttonState = digitalRead(pinButton); //read if button pin receives current (i.e button is pressed)
+  //Serial.println();
+  if(buttonState == HIGH) { // if button is pressed
+    for (int i = 0; i<= 255; i++) { // iterate from 0 to 255, increase brightness
+      analogWrite(red,int(i/(255/R))); // sets duty cycle of red LED -> current loop * (value of random color/255)
+      analogWrite(green, int(i/(255/G))); // sets duty cycle of green LED
+      analogWrite(blue, int(i/(255/B))); // sets duty cycle of blue LED
+    }
+    for (int i = 255; i>= 0; i--) { // iterate from 255 to 0, decrease brightness
+      analogWrite(red,int(i/(255/R))); // sets duty cycle of red LED
+      analogWrite(green, int(i/(255/G))); // sets duty cycle of green LED
+      analogWrite(blue, int(i/(255/B))); // sets duty cycle of blue LED
+    }
+  } else { // else if button not pressed
+    analogWrite(red,0); // set duty cycle of red LED to 0
+    analogWrite(green,0); // set duty cycle of green LED to 0
+    analogWrite(blue,0); // set duty cycle of blue LED to 0
+    randomSeed(analogRead(0));
+    R = random(255); // sets random red value
+    G = random(255); // sets random green value
+    B = random(255); // sets random blue value
+  }
+}
+</code></pre>
+    </div>
+    <div class="header" style="margin-top: 50px">
+      <img class="graph" src="A2 Demo.gif" />
+      <p><b>Circuit demo</b></p>
+    </div>
+    <div class="header">
+      <img class="graph" src="Step Chart PWM.png" />
+      <p><b>Question 1:</b>Pulse Width Modulation Graph</p>
+    </div>
+    <div style="margin-top: 30px">
+      <p>
+        <b>Question 2:</b> Given your schematic, circuit, and firmware, assuming
+        the only thing that draws current is your LEDs, how long would your
+        circuit run if powered by a 1200 mAh battery?
+      </p>
+      <br />
+      <p>
+        Theoretically, if all 3 LEDS are on, the current for the circuit equals
+        20mA + 20mA + 20mA = 60mA.
+        <br />
+        1200 maH = 60mA * hours
+        <br />
+        20 = hours
+        <br />
+        The circuit would run for 20 hours.
+      </p>
+      <br />
+      <p>
+        <b>Question 3:</b> Measure and record the actual voltage across one of
+        your LEDs when it's on. How does this compare to the theoretical forward
+        voltage for your LED color?
+      </p>
+      <br />
+      <p>
+        I measured the actual voltage of the red LED. The typical forward
+        voltage is 2V. I got 1.8V which is in the range of 1.7 and 2.4
+        (theoretical min and max) (datasheet:
+        https://www.farnell.com/datasheets/3497864.pdf)
+      </p>
     </div>
   </body>
 </html>
