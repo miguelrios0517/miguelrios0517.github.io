@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Miguel's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Miguel's Assignment 3!</h1>
+    <div class="header">
+      <img class="graph" src="A3 Circuit Schematic.png" />
+      <p>
+        Here is all the documentation for assignment 3! <br /><br /><br /><br />
+        <b>Circuit schematic</b>
+      </p>
+    </div>
+    <div class="header">
+      <img
+        class="graph"
+        style="width: 50%"
+        src="A3 schematic calculations.png"
+      />
+      <p><b>Calculation for Resitors</b></p>
+    </div>
+    <div class="header">
+      <img class="graph" style="width: 80%" src="A3 R2 calculations.png" />
+      <p><b>Calculation for R2</b></p>
+    </div>
+    <div class="header">
+      <img class="graph" src="A3 image.png" />
+      <p><b>Circuit image</b></p>
+    </div>
+    <div style="margin-top: 30px">
+      <p><b>Code Snippet</b></p>
+      <br />
+      <pre><code>
+
+// I want to explore caves so I wired a circuit that increases brightness of LED the darker the environment is
+
+int analogPin = A2; //set analog pin for photocell
+int red = 9; //set red LED pin
+int green = 10; //set green LED pin
+int blue = 11; //set blue LED pin
+int val = 0; //intialize val -> stores analogRead(analogPin)
+int val_map = 0; //intialize val_map -> stores a map() value from [0,1024] to [0,255]
+
+
+void setup() {
+  Serial.begin(9600); //  setup serial
+  pinMode(red, OUTPUT); //setup red LED pin as OUTPUT 
+  pinMode(green, OUTPUT); //set green LED pin as OUTPUT
+  pinMode(blue, OUTPUT); //set blue LED pin as OUTPUT 
+}
+  
+void loop() {
+  val = analogRead(analogPin); // read Vout
+  Serial.println(val); //print Vout
+  val_map = map(val, 0,1024, 0, 255); // map Vout from [0,1024] to [0,255] so we can pass it to LED pins -> store as val_map
+  if (val_map >= 0 && val_map <= 255){ // check to see if val_map is in range of 0 to 255
+    analogWrite(red, (int)(255 - val_map)); //set red LED duty cycle to 255 minus val_map (lower illuminance -> brighter LED)
+    analogWrite(blue, (int)(255 - val_map)); //set blue LED duty cycle to 255 minus val_map         
+    analogWrite(green, (int)(255 - val_map));  //set green LED duty cycle to 255 minus val_map           
+  }
+  delay(200); // delay 200 miliseconds before starting next loop
+}
+</code></pre>
+    </div>
+    <div class="header" style="margin-top: 50px">
+      <img class="graph" src="A3 Demo.gif" />
+      <p><b>Circuit demo</b></p>
+    </div>
+    <div style="margin-top: 30px">
+      <p>
+        <b>Question 1:</b> In your voltage divider, can the variable resistor be
+        either R1 or R2 or does it need to be one or the other? Justify your
+        answer with example calculations.
+      </p>
+      <br />
+      <p>
+        The variable resistor can be R1 or R2, but this will determine the
+        relationship with Vout (direct or inverse). In our current circuit where
+        the variable resistor = R2, there is a direct relationship with Vout.
+        Vout increases the more light is shined on the photocell. However, if
+        the variable resistor was R1, Vout would decrease the more light is
+        shined. This might actually be a more ideal setup for my circuit since I
+        want my LED to shine brighter the darker the environment is.
+        <br /><br />
+
+        <u>Resistances</u>
+        <br /><br />
+
+        Variable Resitor (photocell) in dark conditions = 10k ohm <br />
+        Variable Resitor (photocell) in light conditions = 1k ohm <br /><br />
+        Resistor = 10k ohm<br /><br />
+
+        <u>Calculations</u><br /><br />
+
+        If variable resistor was R1:<br />
+        dark conditions => Vout = 10000/(10000 + 10000) * 5v = 2.5v<br />
+        light conditions => Vout = 10000/(10000 + 1000) * 5v = 4.55v<br />
+        ... this means more light equals greater vOut!<br /><br />
+
+        If variable resistor was R2<br />
+        dark conditions => Vout = 10000/(10000 + 10000) * 5v = 2.5v<br />
+        light conditions => Vout = 1000/(10000 + 1000) * 5v = 0.45v<br />
+        ... this means more light equals lower vOut!<br />
+      </p>
+      <div class="header">
+        <img class="graph" src="A3 voltage graph.png" />
+        <p><b>Question 2:</b>Voltage graph</p>
+      </div>
+      <br />
+      <p>
+        <b>Question 3:</b> AnalogWrite and analogRead are respectively 8-bit and
+        10-bit values. Imagine you had 10-bit PWM and a 16-bit analog-to-digital
+        converter instead. How would this change your map() code? Explain your
+        answer.
+      </p>
+      <br />
+      <p>
+        In order to map a 16-bit analog-to-digital to 10-bit PWM I would have to
+        map [0,65535] to [0,1024] since the largest 16-bit number is 65,535.
+        This is what the function call would look like:
+        <br /><br />map(val, 0, 65535, 0, 1024).
+      </p>
+    </div>
+  </body>
+</html>
