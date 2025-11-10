@@ -13,7 +13,7 @@
     <div class="header">
       <img class="graph" src="A5_schematic.png" />
       <p>
-        Here is all the documentation for assignment 4! <br /><br /><br /><br />
+        Here is all the documentation for assignment 5! <br /><br /><br /><br />
         <b>Circuit schematic</b>
       </p>
     </div>
@@ -132,14 +132,34 @@ void loop() {
       </div>
        <div class="header">
           <p>
-        <b>Question 3:</b>Here is the datasheet for the L293D chip: https://www.ti.com/product/L293DLinks to an external site.. Draw a schematic using at least your arduino, this chip, and two motors. Write (pseudo) code that shows how you would move the motors both forward, both back, then one forward one back, and one back then forward</p>
-        <pre><code>
-          int pin1 = 9
-          int pin2 = 10
-          int pin7 = 11
-
-        </code></pre>
+        <b>Question 3:</b>Here is the datasheet for the L293D chip. Draw a schematic using at least your arduino, this chip, and two motors. Write (pseudo) code that shows how you would move the motors both forward, both back, then one forward one back, and one back then forward</p>
+        <img class="graph" src="A5 q3.png" />
       </div>
+       <pre><code>
+          // move both motors forward
+          digitalWrite(pin1A, HIGH)
+          digitalWrite(pin2A, LOW)
+          digitalWrite(pin3A, HIGH)
+          digitalWrite(pin4A, LOW)
+
+          // move both motors backward
+          digitalWrite(pin1A, LOW)
+          digitalWrite(pin2A, HIGH)
+          digitalWrite(pin3A, LOW)
+          digitalWrite(pin4A, HIGH)
+
+          // move one back one forward
+          digitalWrite(pin1A, LOW)
+          digitalWrite(pin2A, HIGH)
+          digitalWrite(pin3A, HIGH)
+          digitalWrite(pin4A, LOW)
+
+          // move one forward one back
+          digitalWrite(pin1A, HIGH)
+          digitalWrite(pin2A, LOW)
+          digitalWrite(pin3A, LOW)
+          digitalWrite(pin4A, HIGH)
+        </code></pre>
       <br/>
     </div>
   </body>
