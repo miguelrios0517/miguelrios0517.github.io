@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+    <title>Miguel's HCDE 439 Physical Computing Page!</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Miguel's Assignment 5!</h1>
+    <div class="header">
+      <img class="graph" src="A5_schematic.png" />
+      <p>
+        Here is all the documentation for assignment 4! <br /><br /><br /><br />
+        <b>Circuit schematic</b>
+      </p>
+    </div>
+    </div>
+    <div class="header">
+      <img class="graph" src="A5_circuit_image.png" />
+      <p><b>Circuit image</b></p>
+    </div>
+    <div class="header">
+      <img class="graph" src="A5_circuit_image_tv.png" />
+      <p><b>Back of TV</b></p>
+    </div>
+    <div style="margin-top: 30px">
+      <p><b>Code Snippet</b></p>
+      <br />
+      <pre><code>
+// TV Backlight --> i wanted to make a retro ping pong game where the left and the right LED strips light up everytime the pattle hits the ball (while the game is shown on the TV). I just didn't have time! 
+
+#include <IRremote.hpp> //include IR remote library
+#define IR_RECEIVE_PIN 3 // set pin for IR receiver
+uint32_t last_decodedRawData = 0; // store last received remote data as 32-bit integer
+
+int left = 9;    // the PWM pin the left LED strip is attached to
+int right = 10; // the PWM pin the right LED strip is attached to
+int current = 9; // the LED strip currently being "focused" on
+int l_bright = 0;  // how bright the left LED strip is
+int r_bright = 0;  // how bright the right LED strip is
+
+void translateIR() // takes action based on IR code received
+{
+  // Check if it is a repeat IR code 
+  if (IrReceiver.decodedIRData.flags) 
+  {
+    //set the current decodedRawData to the last decodedRawData 
+    IrReceiver.decodedIRData.decodedRawData = last_decodedRawData; 
+  } 
+  //map the IR code to the remote keys fast forward and fast back
+  switch (IrReceiver.decodedIRData.decodedRawData)
+  {
+    case 0xBB44FF00: //if FAST BACK button pressed
+      Serial.println("FAST BACK"); //serial print button pressed
+      current = 9; // set current LED strip to left
+      break;
+    case 0xBC43FF00: //if FAST FORWARD button pressed
+      Serial.println("FAST FORWARD"); //serial print button pressed
+      current = 10; // set current LED strip to right
+      break;
+    case 0xF807FF00: //if DOWN button pressed
+      Serial.println("DOWN");   //serial print button pressed
+      if (current == 10) { // check if current LED strip is right
+        if ((r_bright - 5) >= 0) { // check if in range
+          r_bright -= 5; // decrease brightness
+        }
+      } else if (current == 9) { // check if current LED strip is left
+        if ((l_bright - 5) >= 0) { // check if in range
+          l_bright -= 5; // decrease brightness
+        }
+      }
+      break;
+    case 0xF609FF00: //if UP button pressed
+      Serial.println("UP");    //serial print button pressed
+      if (current == 10) { // check if current LED strip is right
+        if ((r_bright + 5) <= 255) { // check if in range
+          r_bright += 5; // increase brightness
+        }
+      } else if (current == 9) { // check if current LED strip is left
+        if ((l_bright + 5) <= 255) { // check if in range
+          l_bright += 5; // increase brightness
+        }
+      }
+      break;
+    default: // take default action when any other button is pressed
+      Serial.println(" other button   "); // print to Serial
+  }// End Case
+  //store the last decodedRawData
+  last_decodedRawData = IrReceiver.decodedIRData.decodedRawData; 
+  delay(50); // Do not get immediate repeat
+} 
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // declare pin 9 to be an output:
+  Serial.begin(9600); // // Establish serial communication
+  IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK); // Start the receiver
+  pinMode(left, OUTPUT); // set pinMode for left led strip (9)
+  pinMode(right, OUTPUT); // set pinMode for right led strip (10)
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  analogWrite(left, l_bright); // set brightness of left led strip to l_bright
+  analogWrite(right, r_bright); // set brightness of right led strip to r_bright
+  delay(30); // delay
+
+  if (IrReceiver.decode()) { // check if button pressed on remote
+      translateIR(); // call function translateIR() which checks for IR input and updates l_bright and r_bright
+      IrReceiver.resume(); // Enable receiving of the next value
+  }
+}
+</code></pre>
+    </div>
+    <div class="header" style="margin-top: 50px">
+      <img class="graph" src="A5_demo.GIF" />
+      <p><b>Circuit demo</b></p>
+    </div>
+    <div style="margin-top: 30px">
+      <p>
+        <b>Question 1:</b>This is the datasheet for the n-mosfet transistor. What is the absolute maximum amount of current between pins 2 and 3?</p>
+      <br />
+      <p>Between the drain and the source pin, the maximum amount of current is 80 A (Maximum Body Diode Forward Current)</p>
+      <br />
+      <div class="header">
+        <img class="graph" src="q2.png" />
+          <p>
+        <b>Question 2:</b> Draw a schematic for a circuit with using at least your arduino, a DC motor, a flyback diode, and capacitors between power and ground. Find parts with datasheets you could use for each of these schematic components.</p>
+      </div>
+       <div class="header">
+          <p>
+        <b>Question 3:</b>Here is the datasheet for the L293D chip: https://www.ti.com/product/L293DLinks to an external site.. Draw a schematic using at least your arduino, this chip, and two motors. Write (pseudo) code that shows how you would move the motors both forward, both back, then one forward one back, and one back then forward</p>
+        <pre><code>
+          int pin1 = 9
+          int pin2 = 10
+          int pin7 = 11
+
+        </code></pre>
+      </div>
+      <br/>
+    </div>
+  </body>
+</html>
