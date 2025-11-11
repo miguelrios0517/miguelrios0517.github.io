@@ -30,9 +30,12 @@
       <p><b>Code Snippet</b></p>
       <br />
       <pre><code>
-// TV Backlight --> i wanted to make a retro ping pong game where the left and the right LED strips light up everytime the pattle hits the ball (while the game is shown on the TV). I just didn't have time! 
+// TV Backlight -- > i wanted to make a retro ping pong game where the left and the right LED strips light up everytime 
+// the pattle hits the ball (while the game is shown on the TV). I just didn't have time! 
+// Instead this program controls the brightness of the Left and Right LED strips (using the IR remote) behind the tv 
+// independent of each other. 
 
-#include <IRremote.hpp> //include IR remote library
+#include < IRremote.hpp > //include IR remote library
 #define IR_RECEIVE_PIN 3 // set pin for IR receiver
 uint32_t last_decodedRawData = 0; // store last received remote data as 32-bit integer
 
@@ -119,6 +122,11 @@ void loop() {
       <img class="graph" src="A5_demo.GIF" />
       <p><b>Circuit demo</b></p>
     </div>
+    <div class="header" style="margin-top: 50px">
+      <img class="graph" src="A5_demo_final.gif" />
+      <p><b>Finally got it to work the next day!</b></p>
+    </div>
+    <p>I am using the IR remote to control the left and right paddles</p>
     <div style="margin-top: 30px">
       <p>
         <b>Question 1:</b>This is the datasheet for the n-mosfet transistor. What is the absolute maximum amount of current between pins 2 and 3?</p>
