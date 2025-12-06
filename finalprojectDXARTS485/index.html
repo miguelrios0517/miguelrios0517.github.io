@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabor Peruano: A Dialogue Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="intro-screen" class="screen active">
+      <video id="intro-video" width="100%" autoplay muted>
+        <source src="intro_video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <button id="skip-intro-btn">Skip/Start Game</button>
+    </div>
+
+    <div id="main-menu" class="screen">
+      <h1>Sabor Peruano: The Chef's Table</h1>
+      <p>A culinary dialogue experience.</p>
+      <button id="start-game-btn">Start New Game</button>
+      <button id="how-to-play-btn">How to Play</button>
+    </div>
+
+    <div id="game-screen" class="screen">
+      <div id="scene-container">
+        <img id="scene-img" src="" alt="Restaurant Scene" class="scene-image" />
+
+        <img
+          id="persona-img"
+          src=""
+          alt="Character or Dish"
+          class="persona-image"
+        />
+
+        <div id="speaker-name"></div>
+      </div>
+
+      <div id="dialogue-box">
+        <p id="dialogue-text"></p>
+        <div id="options-container"></div>
+        <button id="next-dialogue-btn" class="hidden">Next &raquo;</button>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
