@@ -46,6 +46,7 @@ body {
 
 #main-menu button,
 #skip-intro-btn,
+#start-video-btn,
 #start-game-btn,
 #how-to-play-btn {
   padding: 15px 30px;
@@ -177,12 +178,21 @@ body {
 #intro-video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: fill;
 }
 
 #skip-intro-btn {
   position: absolute;
-  bottom: 20px;
+  bottom: 80px;
+  right: 20px;
+  z-index: 30;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+}
+
+#start-video-btn {
+  position: absolute;
+  bottom: 80px;
   right: 20px;
   z-index: 30;
   background-color: rgba(0, 0, 0, 0.5);

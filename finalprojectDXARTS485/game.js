@@ -580,6 +580,7 @@ const DIALOGUE2 = {
 const introScreen = document.getElementById("intro-screen");
 const introVideo = document.getElementById("intro-video");
 const skipIntroBtn = document.getElementById("skip-intro-btn");
+const startVideoBtn = document.getElementById("start-video-btn");
 const mainMenu = document.getElementById("main-menu");
 const startGameBtn = document.getElementById("start-game-btn");
 const gameScreen = document.getElementById("game-screen");
@@ -691,6 +692,31 @@ introVideo.addEventListener("ended", () => {
   showScreen(mainMenu);
 });
 
+introVideo.addEventListener("play", () => {
+  if (!startVideoBtn.classList.contains("hidden")) {
+    startVideoBtn.classList.toggle("hidden");
+    skipIntroBtn.classList.toggle("hidden");
+  }
+});
+
+const isVideoPlaying = (video) =>
+  !!(
+    video.currentTime > 0 &&
+    !video.paused &&
+    !video.ended &&
+    video.readyState > 2
+  );
+
+startVideoBtn.addEventListener("click", () => {
+  introVideo.play().catch((error) => {
+    console.log("Autoplay failed, user interaction needed:", error);
+    // If autoplay fails, prompt the user to start
+    skipIntroBtn.textContent = "Click to Start";
+  });
+  startVideoBtn.classList.toggle("hidden");
+  skipIntroBtn.classList.toggle("hidden");
+});
+
 skipIntroBtn.addEventListener("click", () => {
   introVideo.pause();
   showScreen(mainMenu);
@@ -710,9 +736,9 @@ document.getElementById("how-to-play-btn").addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   showScreen(introScreen);
   // Ensure the video plays immediately if possible
-  introVideo.play().catch((error) => {
-    console.log("Autoplay failed, user interaction needed:", error);
-    // If autoplay fails, prompt the user to start
-    skipIntroBtn.textContent = "Click to Start";
-  });
+  // introVideo.play().catch((error) => {
+  //   console.log("Autoplay failed, user interaction needed:", error);
+  //   // If autoplay fails, prompt the user to start
+  //   skipIntroBtn.textContent = "Click to Start";
+  // });
 });
