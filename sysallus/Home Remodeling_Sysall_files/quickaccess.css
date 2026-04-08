@@ -1,0 +1,136 @@
+/**
+ * Quick Access Styles
+ * 
+ * @description Estilos para un componente de acceso rápido moderno y responsivo
+ * @version 3.0.0
+ * @author @Sysall
+ * @license MIT
+ * 
+ * Características:
+ * - Diseño responsivo y adaptable
+ * - Animaciones y transiciones suaves
+ * - Soporte para iconos personalizables
+ * - Contador de caracteres dinámico
+ * - Interfaz intuitiva y fácil de usar
+ * - Optimizado para rendimiento
+ * - Compatible con múltiples navegadores
+ */
+
+.quickAccess {
+  /* --bg: #13131370; */
+  --bg: linear-gradient(to right, rgb(80 229 144 /0.5), rgb(53 200 164 /0.5));
+  --color-primary: #009ac7;
+  --color-secondary: #232323;
+  --color-secondary-dark: #000;
+  --color-icon: #fff;
+  --color-icon-light: #fff;
+  --border-color: #3e3e3e;
+  --border-line: 3px solid var(--color-primary);
+  background: var(--bg);
+  border-top: var(--border-line);
+  border-left: var(--border-line);
+  border-right: var(--border-line);
+  border-radius: 30px 30px 0 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  height: 45px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.quickAccess .a {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-secondary);
+  border: 3px solid var(--color-primary);
+  padding: 10px;
+}
+
+.quickAccess .a i {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-size: 25px;
+}
+
+.quickAccess .a svg {
+  width: 60px;
+  height: 60px;
+  color: var(--color-icon);
+  font-size: 25px;
+}
+
+.quickAccess .a span {
+  position: absolute;
+  bottom: -25px;
+  color: var(--color-icon);
+  width: 115px;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* Utilidades */
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+.z-3 {
+  z-index: 3;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.z-999 {
+  z-index: 999;
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none;
+  }
+
+  .d-lg-block {
+    display: block;
+  }
+}
