@@ -9,7 +9,7 @@ import playformInline from "@playform/inline";
 export default defineConfig({
   site: "https://miguelrios0517.github.io",
   base: "/restaurants",
-  // trailingSlash: 'always',
+  trailingSlash: "always",
   integrations: [
     alpinejs(),
     mdx(),
