@@ -1,32 +1,32 @@
 export const menuMain = [
   {
     name: "Home",
-    url: "/mercadolatino/",
+    url: "/restaurants/mercadolatino/",
     highlighted: false,
   },
   {
     name: "Butcher",
-    url: "/mercadolatino/butcher",
+    url: "/restaurants/mercadolatino/butcher",
     highlighted: false,
   },
   {
     name: "Restaurant",
-    url: "/mercadolatino/restaurant",
+    url: "/restaurants/mercadolatino/restaurant",
     highlighted: false,
   },
   {
     name: "Gallery",
-    url: "/mercadolatino/gallery",
+    url: "/restaurants/mercadolatino/gallery",
     highlighted: false,
   },
   {
     name: "Hours & Location",
-    url: "/mercadolatino/contact",
+    url: "/restaurants/mercadolatino/contact",
     highlighted: false,
   },
   {
     name: "Call Us",
-    url: "/mercadolatino/book",
+    url: "/restaurants/mercadolatino/book",
     highlighted: true,
   },
 ];

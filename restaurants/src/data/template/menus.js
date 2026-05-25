@@ -1,32 +1,32 @@
 export const menuMain = [
   {
     name: "Home",
-    url: "/template/",
+    url: "/restaurants/template/",
     highlighted: false,
   },
   {
     name: "Menu",
-    url: "/template/menu",
+    url: "/restaurants/template/menu",
     highlighted: false,
   },
   {
     name: "About Us",
-    url: "/template/about-us",
+    url: "/restaurants/template/about-us",
     highlighted: false,
   },
   {
     name: "Gallery",
-    url: "/template/gallery",
+    url: "/restaurants/template/gallery",
     highlighted: false,
   },
   {
     name: "Contact",
-    url: "/template/contact",
+    url: "/restaurants/template/contact",
     highlighted: false,
   },
   {
     name: "Book",
-    url: "/template/book",
+    url: "/restaurants/template/book",
     highlighted: true,
   },
 ];

@@ -1,32 +1,32 @@
 export const menuMain = [
   {
     name: "Home",
-    url: "/gingerteriyaki/",
+    url: "/restaurants/gingerteriyaki/",
     highlighted: false,
   },
   {
     name: "Menu",
-    url: "/gingerteriyaki/menu",
+    url: "/restaurants/gingerteriyaki/menu",
     highlighted: false,
   },
   {
     name: "About Us",
-    url: "/gingerteriyaki/about-us",
+    url: "/restaurants/gingerteriyaki/about-us",
     highlighted: false,
   },
   {
     name: "Gallery",
-    url: "/gingerteriyaki/gallery",
+    url: "/restaurants/gingerteriyaki/gallery",
     highlighted: false,
   },
   {
     name: "Hours & Location",
-    url: "/gingerteriyaki/contact",
+    url: "/restaurants/gingerteriyaki/contact",
     highlighted: false,
   },
   {
     name: "(123) 456-789",
-    url: "/gingerteriyaki/book",
+    url: "/restaurants/gingerteriyaki/book",
     highlighted: true,
   },
 ];
