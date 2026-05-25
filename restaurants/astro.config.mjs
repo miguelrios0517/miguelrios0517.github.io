@@ -8,7 +8,7 @@ import playformInline from "@playform/inline";
 // https://astro.build/config
 export default defineConfig({
   site: "https://miguelrios0517.github.io",
-  base: "/restaurant",
+  base: "/restaurants",
   // trailingSlash: 'always',
   integrations: [
     alpinejs(),
