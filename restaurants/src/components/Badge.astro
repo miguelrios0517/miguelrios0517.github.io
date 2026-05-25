@@ -1,0 +1,19 @@
+---
+const { color = "primary", title = "" }: BadgeProps = Astro.props;
+
+interface BadgeProps {
+	color?: "primary" | "secondary" | "black";
+	title?: string;
+}
+
+const colors = {
+	primary: "bg-brand-primary/5 text-brand-primary ring-1 ring-brand-primary",
+	secondary: "bg-brand-secondary/5 text-brand-secondary ring-1 ring-brand-secondary",
+	black: "text-brand-black ring-1 ring-brand-black/33",
+	white: "bg-white",
+};
+---
+
+<span class={`inline-flex not-prose items-center mb-4 rounded-full px-3 py-1 text-base font-semibold ${colors[color]}`}
+	>{title}</span
+>
